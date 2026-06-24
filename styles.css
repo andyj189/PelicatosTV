@@ -1,0 +1,60 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background: #f4f4f4;
+}
+
+.articulo {
+    display: flex;
+      align-items: center;   /* Centra verticalmente */
+      justify-content: center; /* Centra horizontalmente */
+      gap: 10px; /* Espacio entre logo y texto */
+      margin-top: 20px;
+}
+
+header {
+    background-color: #e60012;
+    /* Rojo Honda */
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+main {
+    padding: 20px;
+    max-width: 800px;
+    margin: auto;
+}
+
+.post {
+    background: #fff;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.post img,
+.post video {
+    max-width: 100%;
+    border-radius: 6px;
+}
+
+.post h2 a {
+    color: #333;
+    text-decoration: none;
+}
+
+.post h2 a:hover {
+    color: #007BFF;
+}
+
+footer {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+}
