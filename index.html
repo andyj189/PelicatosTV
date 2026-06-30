@@ -6,7 +6,7 @@
     <title>PelicatosTV</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="icon" href="img/logo_titulo.png" type="image/png">
+    <link rel="icon" href="img/logos/logo_titulo.png" type="image/png">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="En esta pagina encontraras todas los videos relacinados a PELICATOSTV">
     <meta name="keywords" content="Videos, Experiencia, Diversión">
@@ -17,10 +17,13 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm bg-body-tertiary">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">PELICATOS TV</a>
-                <img >
+        <!--Parte superior de la pagina, con -->
+        <nav class="navbar fixed-top navbar-expand-md bg-body-tertiary">
+            <div class="container-fluid ">
+                <a class="navbar-brand px-4" href="#">PELICATOS TV</a>
+                <a href="#" class="position-absolute top-50 start-50 translate-middle">
+                    <img src="img/logos/logo_titulo.png" alt="Logo_pelicatos" width="50">
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -45,107 +48,163 @@
     </header>
     <!--Es un carrucel con fotos dinamicas-->
     <main>
-        <div id="carouselExampleIndicators" class="carousel slide">
-        <div class="carousel-indicators">
+        <div id="carouselExample" class="carousel slide">
+        <!-- <div class="carousel-indicators">
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-        </div>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" aria-label="Slide 4"></button>
+        </div> -->
         <div class="carousel-inner">
         <div class="carousel-item active">
-            <img src="img/cataratas_caracucho.png" class="d-block w-100" alt="...">
+            <img src="img/imagenes/Cataratas de Caracucho/Cararatas_caracucho.jpg" class="d-block w-100" alt="...">
         </div>
         <div class="carousel-item">
-            <img src="img/meseta_andina.png" class="d-block w-100" alt="...">
+            <img src="img/imagenes/Huaraz_Yungay/Laguna_yunyay.jpg" class="d-block w-100" alt="...">
         </div>
         <div class="carousel-item">
-            <img src="img/postres_patty.png" class="d-block w-100" alt="...">
+            <img src="img/imagenes/Meseta Andina/Imagen_fondo.jpg" class="d-block w-100" alt="...">
         </div>
+        <div class="carousel-item">
+            <img src="img/imagenes/Paracas/paracas_fondo.jpg" class="d-block w-100" alt="...">
         </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
+        <div class="carousel-item">
+            <img src="img/imagenes/Parque de Aguas/Fondo_aguas.jpg" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+            <img src="img/imagenes/Postres de Patty/postres_patty.jpg" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+            <img src="img/imagenes/Q tal Burger/fondo.jpg" class="d-block w-100" alt="...">
+        </div>
+
+        </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
     </main>
-
+    <br>
     <!--Fila con opciones, es un contenedor fluido, con margen y texto centrado-->
-    <div class="container-fluid bg-light py-4 text-center">
-        <div class="row">
-            <div class="col-sm-6 col-md-3 col-6">Cataratas</div>
-            <div class="col-sm-6 col-md-3 col-6">Heladeria</div>
-            <div class="col-sm-6 col-md-3 col-6">Meseta</div>
-            <div class="col-sm-6 col-md-3 col-6">yanayacu</div>
+    <div class="container-fluid bg-light py-4 text-center px-4">
+        <div class="row g-2">
+            <div class="col-sm-6 col-md-3 col-lg-1 rounded-5 border border-black py-3">Huaraz</div>
+            <div class="col-sm-6 col-md-3 col-lg-2 rounded-5 border border-black py-3">Postres de Patty</div>
+            <div class="col-sm-6 col-md-3 col-lg-2 rounded-5 border border-black py-3">Q'Tal Burger</div>
+            <div class="col-sm-6 col-md-3 col-lg-2 rounded-5 border border-black py-3">Meseta Andina</div>
+            <div class="col-sm-6 col-md-3 col-lg-2 rounded-5 border border-black py-3">Cataratas de Carachucho</div>
+            <div class="col-sm-6 col-md-3 col-lg-2 rounded-5 border border-black py-3">Parque de las Aguas</div>
+            <div class="col-sm-6 col-md-3 col-lg-1 rounded-5 border border-black py-3">Paracas</div>
         </div>
     </div>
-
-    <div class="container">
-        <h1 class="text-center py-4">Sobre Mi</h1>
-        <div class="row py-5">
-            <div class="col">Soy una persona buena</div>
-            <div class="col">Soy un huevon más</div>
+    <br>
+    <div class="container-fluid bg-light py-4 text-center">
+        <h1>Sobre Mi</h1>
+        <div class="row">
+            <div class="col-sm-12 col-md-6">(Contenido)</div>
+            <div class="col-sm-12 col-md-6">(Contenido)</div>
         </div>
     </div>
     
     <br>
     <div class="experiencias-fluid bg-light text-center py-5">
-        <div class="row ">
-            <div class="col-6">
+        <div class="row">
+            <!--Utilizamos para pantallas pequeñas 12 columnas y para medianas y grandes 6-->
+            <div class="col-sm-12 col-md-6">
                 <h1>Cataratas de Caracucho</h1>
             </div>
-            <div class="col-6">
-                <img src="img/img_face.jpg">
+            <div class="col-sm-12 col-md-6">
+                <img class="rounded-4" src="img/img_face.jpg">
             </div>
         </div>
     </div>
     <br>
     <div class="experiencias-fluid bg-light text-center py-5">
         <div class="row ">
-            <div class="col-6">
-                <img src="img/img_face.jpg">
+            <div class="col-sm-12 col-md-6">
+                <img class="rounded-4" src="img/img_face.jpg">
             </div>
-            <div class="col-6">
-                <h1>Cataratas de Caracucho</h1>
+            <div class="col-sm-12 col-md-6">
+                <h1>Postres de Patty</h1>
                 
             </div>
         </div>
     </div>
     <br>
-    <div class="experiencias-fluid bg-light text-center py-5">
+    <div class="experiencias-fluid bg-light text-center py-5 ">
         <div class="row ">
-            <div class="col-6">
-                <h1>Cataratas de Caracucho</h1>
+            <div class="col-sm-12 col-md-6">
+                <h1>Meseta Andina</h1>
             </div>
-            <div class="col-6">
-                <img src="img/img_face.jpg">
+            <div class="col-sm-12 col-md-6">
+                <img class="rounded-4" src="img/img_face.jpg">
             </div>
         </div>
     </div>
     <br>
     <div class="experiencias-fluid bg-light text-center py-5">
         <div class="row ">
-            <div class="col-6">
-                <img src="img/img_face.jpg">
+            <div class="col-sm-12 col-md-6">
+                <img class="rounded-4" src="img/imagenes/Q tal Burger/Inaguracion.jpg">
             </div>
-            <div class="col-6">
-                <h1>Cataratas de Caracucho</h1>
+            <div class="col-sm-12 col-md-6">
+                <h1>Q' tal Burger</h1>
             </div>
         </div>
     </div>
     <br>
-
+    <div class="experiencias-fluid bg-light text-center py-5">
+        <div class="row ">
+            <div class="col-sm-12 col-md-6">
+                <h1>Parque de las Aguas</h1>
+                
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <img class="rounded-4" src="img/img_face.jpg">
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="experiencias-fluid bg-light text-center py-5">
+        <div class="row ">
+            <div class="col-sm-12 col-md-6">
+                <img class="rounded-4" src="img/img_face.jpg">
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <h1>Huaraz-Yungay</h1>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="experiencias-fluid bg-light text-center py-5">
+        <div class="row ">
+            <div class="col-sm-12 col-md-6">
+                <h1>Paracas</h1>         
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <img class="rounded-4" src="img/img_face.jpg">
+            </div>
+        </div>
+    </div>
+    <br>    
 
     <article>
-        <div class="redes-fluid">
+        <div class="redes-fluid py-4 px-4">
             <div class="row redes">
-                <img src="img/img_face.jpg" alt="Pagina Facebook">
-                <img src="img/img_insta.webp" alt="Pagina Instagram">
-                <img src="img/img_tiktok.jpg" alt="Pagina TikTok">
-                <img src="img/img_yutu.jpg" alt="Canal Youtube">
+                <!--Porque no hay columnas se agregue un display flex, y un centrado de las imagenes, y una separacion de 3, agregando
+                un flex-wrap que ayuda como resposive, las imagenes se alinean una debajo de la otra depende el tamaño de la pantalla-->
+                <div class="d-flex justify-content-center gap-3 flex-wrap">
+                    <img class="rounded-circle border border-black" src="img/redes/img_face.jpg" alt="Pagina Facebook">
+                    <img class="rounded-circle border border-black" src="img/redes/img_insta.webp" alt="Pagina Instagram">
+                    <img class="rounded-circle border border-black" src="img/redes/img_tiktok.jpg" alt="Pagina TikTok">
+                    <img class="rounded-circle border border-black" src="img/redes/img_yutu.jpg" alt="Canal Youtube">
+                </div>
+                
             </div>
         </div>  
     </article>
@@ -154,7 +213,7 @@
 
     <footer >
         <div class="row bg-secondary text-center pt-5">
-            <p>Mi Blog De Videos</p>
+            <p>PELICATOS TV 🌄🌅🛣️🏔️🌍🎞️</p>
             <p>Informacion de contacto:</p>
             <ul>
                 <!--abbr es la abrebiatura que se le asigna a la palabra, en este caso a telefono: Tef-->

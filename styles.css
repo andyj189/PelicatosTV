@@ -1,24 +1,28 @@
 .carousel-item {
     max-height: 600px;
-    width: 400px;
+}
+.carousel img {
+    max-height: 800px;
 }
 
-.experiencias{
-    max-width: 500px;
+.experiencias img{
+    max-height: 500px;
     padding: 15px;
 
     
 }
 .row img {
-    width: 400px;
+    max-width: 400px;
     height: 400px;
 }
 
 .redes img {
-    height: 350px;
+    max-height: 350px;
     width: 350px;
     
+    
 }
+
 
 
 /* body {
