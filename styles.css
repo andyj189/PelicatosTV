@@ -1,8 +1,8 @@
 .carousel-item {
-    max-height: 600px;
+    max-height: 700px;
 }
 .carousel img {
-    max-height: 800px;
+    max-height: 700px;
 }
 
 .experiencias img{
@@ -17,12 +17,19 @@
 }
 
 .redes img {
-    max-height: 350px;
-    width: 350px;
-    
-    
+    max-height: 300px;
+    width: 300px;
+       
 }
 
+body{
+    font-family: "Poppins", sans-serif;
+}
+
+h1, h2, .navbar-brand, p{
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+}
 
 
 /* body {
