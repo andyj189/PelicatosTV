@@ -31,6 +31,24 @@ h1, h2, .navbar-brand, p{
     font-weight: 700;
 }
 
+.ticker{
+    display: flex;
+    width: max-content;
+    animation: mover 25s linear infinite;
+}
+
+.ticker:hover{
+    animation-play-state: paused;
+}
+
+@keyframes mover{
+    from{
+        transform: translateX(0);
+    }
+    to{
+        transform: translateX(-50%);
+    }
+}
 
 
 /* body {
