@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pelicatos TV | Prueba de acceso</title>
+  <link rel="stylesheet" href="/demo/styles.css">
+</head>
+<body>
+  <main class="shell">
+    <section class="intro">
+      <p class="eyebrow">Pelicatos TV / API</p>
+      <h1>Prueba de usuarios</h1>
+      <p>Crea un usuario y comprueba que el login devuelve un token válido.</p>
+      <div class="status" id="status" role="status">Listo para probar.</div>
+    </section>
+    <section class="panel-grid">
+      <form class="panel" id="register-form">
+        <h2>Crear usuario</h2>
+        <label>Nombre<input name="nombre" required autocomplete="name"></label>
+        <label>Correo<input name="email" type="email" required autocomplete="email"></label>
+        <label>Contraseña<input name="password" type="password" minlength="8" required autocomplete="new-password"></label>
+        <button type="submit">Crear usuario</button>
+      </form>
+      <form class="panel" id="login-form">
+        <h2>Iniciar sesión</h2>
+        <label>Correo<input name="email" type="email" required autocomplete="email"></label>
+        <label>Contraseña<input name="password" type="password" required autocomplete="current-password"></label>
+        <button type="submit">Entrar</button>
+        <pre id="token-output" aria-live="polite"></pre>
+      </form>
+    </section>
+  </main>
+  <script src="/demo/app.js"></script>
+</body>
+</html>

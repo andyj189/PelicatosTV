@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tu espacio personal en Pelicatos TV.">
+    <title>Mi cuenta | Pelicatos TV</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="img/logos/logo_titulo.png" type="image/png">
+    <link rel="stylesheet" href="cuenta.css">
+</head>
+<body>
+    <header class="account-header">
+        <a class="brand" href="index.html"><img src="img/logos/logo_titulo.png" alt=""> PELICATOS TV</a>
+        <a class="back-link" href="index.html">Volver al blog</a>
+    </header>
+
+    <main class="account-shell">
+        <section class="auth-view" id="auth-view">
+            <div class="auth-art">
+                <span class="kicker">Tu mapa, tus historias</span>
+                <h1>Guarda las aventuras que te gustaría volver a vivir.</h1>
+                <p>Crea tu espacio personal para escribir, organizar y conservar tus propios viajes.</p>
+                <div class="art-stamp">PELICATOS<br><strong>MI RUTA</strong></div>
+            </div>
+            <div class="auth-panel">
+                <div class="auth-tabs" role="tablist">
+                    <button class="tab-button active" data-auth-tab="login" type="button">Iniciar sesión</button>
+                    <button class="tab-button" data-auth-tab="register" type="button">Crear cuenta</button>
+                </div>
+                <div class="form-heading">
+                    <span class="kicker" id="auth-kicker">Tu espacio personal</span>
+                    <h2 id="auth-title">Qué bueno verte.</h2>
+                    <p id="auth-description">Ingresa para continuar con tus historias.</p>
+                </div>
+                <form id="login-form" class="auth-form">
+                    <label for="login-email">Correo electrónico</label>
+                    <input id="login-email" name="email" type="email" required autocomplete="email" placeholder="tu@correo.com">
+                    <label for="login-password">Contraseña</label>
+                    <input id="login-password" name="password" type="password" required autocomplete="current-password" placeholder="Mínimo 8 caracteres">
+                    <button class="primary-button" type="submit">Entrar a mi cuenta <span>→</span></button>
+                </form>
+                <form id="register-form" class="auth-form" hidden>
+                    <label for="register-name">Tu nombre</label>
+                    <input id="register-name" name="nombre" required autocomplete="name" placeholder="¿Cómo te llamas?">
+                    <label for="register-email">Correo electrónico</label>
+                    <input id="register-email" name="email" type="email" required autocomplete="email" placeholder="tu@correo.com">
+                    <label for="register-password">Contraseña</label>
+                    <input id="register-password" name="password" type="password" minlength="8" required autocomplete="new-password" placeholder="Mínimo 8 caracteres">
+                    <button class="primary-button" type="submit">Crear mi cuenta <span>→</span></button>
+                </form>
+                <p class="form-message" id="auth-message" role="alert"></p>
+            </div>
+        </section>
+
+        <section class="dashboard-view" id="dashboard-view" hidden>
+            <div class="dashboard-topline">
+                <div>
+                    <span class="kicker">Mi espacio</span>
+                    <h1 id="welcome-title">Tus aventuras</h1>
+                    <p class="subheading">Un lugar para escribir lo que viviste y guardar lo que viene.</p>
+                    <p class="dashboard-message" id="dashboard-message" role="status"></p>
+                </div>
+                <nav class="profile-nav" aria-label="Secciones de tu perfil">
+                    <a class="active" href="#perfil-feed">Inicio</a>
+                    <a href="#adventure-form">Destinos</a>
+                    <a href="#media-form">Galería</a>
+                    <button class="text-button" id="logout-button" type="button">Cerrar sesión</button>
+                </nav>
+            </div>
+
+            <div class="dashboard-grid">
+                <aside class="profile-card">
+                    <div class="avatar" id="profile-avatar">P</div>
+                    <h2 id="profile-name">Tu nombre</h2>
+                    <p id="profile-email">tu@correo.com</p>
+                    <form id="profile-form" class="compact-form">
+                        <label for="profile-name-input">Nombre</label>
+                        <input id="profile-name-input" name="nombre" required>
+                        <label for="profile-bio-input">Sobre mí</label>
+                        <textarea id="profile-bio-input" name="biografia" rows="4" maxlength="1000" placeholder="Cuéntanos qué te mueve a viajar..."></textarea>
+                        <button class="secondary-button" type="submit">Guardar perfil</button>
+                    </form>
+                </aside>
+
+                <div class="content-column" id="perfil-feed">
+                    <section class="media-section">
+                        <div class="section-heading"><div><span class="kicker">Comparte tu ruta</span><h2>Nueva publicación</h2></div><span class="section-mark">00</span></div>
+                        <form id="media-form" class="media-form">
+                            <div class="form-row"><input name="titulo" required maxlength="160" placeholder="Título de tu publicación"><input name="descripcion" maxlength="1000" placeholder="Describe el momento"></div>
+                            <label class="media-picker" for="media-input"><span class="upload-icon">＋</span><strong id="media-file-name">Selecciona una imagen o video</strong><small>JPG, PNG, WEBP, GIF, MP4, WEBM o MOV. Imágenes optimizadas automáticamente.</small><input id="media-input" name="file" type="file" accept="image/jpeg,image/png,image/webp,image/gif,video/mp4,video/webm,video/quicktime" required></label>
+                            <div class="form-actions"><span class="form-message" id="media-message"></span><button class="primary-button" type="submit">Publicar en mi perfil <span>→</span></button></div>
+                        </form>
+                    </section>
+
+                    <section class="feed-section">
+                        <div class="section-heading"><div><span class="kicker">Tu perfil</span><h2>Mis publicaciones</h2></div><span class="section-mark">01</span></div>
+                        <div class="social-feed" id="media-feed"></div>
+                    </section>
+
+                    <section class="composer-section">
+                        <div class="section-heading">
+                            <div><span class="kicker">Diario de viaje</span><h2>Escribe una aventura</h2></div>
+                            <span class="section-mark">02</span>
+                        </div>
+                        <form id="adventure-form" class="adventure-form">
+                            <input name="titulo" required maxlength="160" placeholder="Título de tu aventura">
+                            <div class="form-row">
+                                <input name="ubicacion" maxlength="160" placeholder="¿Dónde fue?">
+                                <select name="id_categoria" id="category-select"><option value="">Sin categoría</option></select>
+                            </div>
+                            <textarea name="contenido" required rows="6" placeholder="Cuenta qué viste, qué sentiste y qué recomendarías..."></textarea>
+                            <div class="form-actions"><span class="form-message" id="adventure-message"></span><button class="primary-button" type="submit">Publicar aventura <span>→</span></button></div>
+                        </form>
+                    </section>
+
+                    <section class="categories-section">
+                        <div class="section-heading"><div><span class="kicker">Organiza tus historias</span><h2>Tus categorías</h2></div><span class="section-mark">03</span></div>
+                        <form id="category-form" class="inline-form"><input name="nombre" required maxlength="80" placeholder="Ej. Playas, montaña, comida"><button class="secondary-button" type="submit">Añadir</button></form>
+                        <div class="category-list" id="category-list"></div>
+                    </section>
+
+                    <section class="photos-section">
+                        <div class="section-heading"><div><span class="kicker">Tu archivo visual</span><h2>Sube tus fotos</h2></div><span class="section-mark">04</span></div>
+                        <form id="photo-form" class="upload-form"><label class="upload-drop" for="photo-input"><span class="upload-icon">＋</span><strong>Elige una imagen</strong><small>JPG, PNG, WEBP o GIF</small><input id="photo-input" name="file" type="file" accept="image/jpeg,image/png,image/webp,image/gif" required></label><button class="secondary-button" type="submit">Guardar foto</button></form>
+                        <div class="photo-grid" id="photo-grid"></div>
+                    </section>
+
+                    <section class="adventures-section">
+                        <div class="section-heading"><div><span class="kicker">Lo que has vivido</span><h2>Mis aventuras</h2></div><span class="section-mark">05</span></div>
+                        <div class="adventure-list" id="adventure-list"></div>
+                    </section>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="cuenta.js"></script>
+</body>
+</html>
