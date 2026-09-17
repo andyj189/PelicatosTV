@@ -9,11 +9,12 @@ from sqlalchemy.orm import Session
 
 from app.core.dependencies import get_current_user
 from app.db.database import get_db
-from app.models import Aventura, Categoria, Foto, Medio, Usuario
-from app.schemas.content import AdventureCreate, CategoryCreate, ProfileUpdate
+from app.models import Aventura, Categoria, Foto, Medio, Perfil, Usuario
+from app.schemas.content import AdventureCreate, AdventureUpdate, CategoryCreate, ProfileUpdate, SiteSettingsUpdate
 
 
 router = APIRouter(prefix="/me", tags=["Espacio personal"])
+public_router = APIRouter(prefix="/public", tags=["Sitios públicos"])
 UPLOAD_DIR = Path(__file__).resolve().parents[1] / "static" / "uploads"
 ALLOWED_IMAGE_TYPES = {"image/jpeg", "image/png", "image/webp", "image/gif"}
 ALLOWED_VIDEO_TYPES = {"video/mp4", "video/webm", "video/quicktime"}
@@ -42,6 +43,144 @@ def update_profile(
     db.commit()
     db.refresh(current_user)
     return {"mensaje": "Perfil actualizado", "perfil": get_profile(current_user)}
+
+
+def get_or_create_site(db: Session, current_user: Usuario):
+    site = db.query(Perfil).filter(Perfil.id_usuario == current_user.id_usuario).first()
+    if site is None:
+        site = Perfil(id_usuario=current_user.id_usuario, nombre_mostrar=current_user.nombre)
+        db.add(site)
+        db.commit()
+        db.refresh(site)
+    return site
+
+
+@router.get("/site")
+def get_site(db: Session = Depends(get_db), current_user: Usuario = Depends(get_current_user)):
+    site = get_or_create_site(db, current_user)
+    return {
+        "nombre_mostrar": site.nombre_mostrar or current_user.nombre,
+        "descripcion": site.descripcion,
+        "logo": site.logo,
+        "fondo_url": site.fondo_url,
+        "hero_image_url": site.hero_image_url,
+        "hero_eyebrow": site.hero_eyebrow,
+        "hero_titulo": site.hero_titulo,
+        "hero_descripcion": site.hero_descripcion,
+        "facebook_url": site.facebook_url,
+        "instagram_url": site.instagram_url,
+        "tiktok_url": site.tiktok_url,
+        "youtube_url": site.youtube_url,
+        "footer_descripcion": site.footer_descripcion,
+        "copyright_texto": site.copyright_texto,
+        "id_usuario": current_user.id_usuario,
+    }
+
+
+@router.put("/site")
+def update_site(
+    settings: SiteSettingsUpdate,
+    db: Session = Depends(get_db),
+    current_user: Usuario = Depends(get_current_user),
+):
+    site = get_or_create_site(db, current_user)
+    for field, value in settings.model_dump().items():
+        setattr(site, field, value)
+    db.commit()
+    db.refresh(site)
+    return get_site(db, current_user)
+
+
+def upload_site_image(file: UploadFile, field_name: str, db: Session, current_user: Usuario):
+    if file.content_type not in ALLOWED_IMAGE_TYPES:
+        raise HTTPException(status_code=status.HTTP_415_UNSUPPORTED_MEDIA_TYPE, detail="Solo se permiten imágenes JPG, PNG, WEBP o GIF")
+    content = file.file.read()
+    try:
+        image = Image.open(io.BytesIO(content))
+        image.thumbnail((2400, 2400), Image.Resampling.LANCZOS)
+        if image.mode not in ("RGB", "RGBA"):
+            image = image.convert("RGB")
+    except (OSError, ValueError):
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="La imagen no es válida")
+    UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
+    filename = f"{current_user.id_usuario}_{field_name}_{uuid4().hex}.jpg"
+    destination = UPLOAD_DIR / filename
+    image.save(destination, "JPEG", quality=86, optimize=True)
+    site = get_or_create_site(db, current_user)
+    setattr(site, field_name, f"/media/uploads/{filename}")
+    db.commit()
+    db.refresh(site)
+    return get_site(db, current_user)
+
+
+@router.post("/site/logo")
+def upload_site_logo(file: UploadFile = File(...), db: Session = Depends(get_db), current_user: Usuario = Depends(get_current_user)):
+    return upload_site_image(file, "logo", db, current_user)
+
+
+@router.post("/site/background")
+def upload_site_background(file: UploadFile = File(...), db: Session = Depends(get_db), current_user: Usuario = Depends(get_current_user)):
+    return upload_site_image(file, "fondo_url", db, current_user)
+
+
+@router.post("/site/hero-image")
+def upload_site_hero_image(file: UploadFile = File(...), db: Session = Depends(get_db), current_user: Usuario = Depends(get_current_user)):
+    return upload_site_image(file, "hero_image_url", db, current_user)
+
+
+@public_router.get("/site/{user_id}")
+def get_public_site(user_id: int, db: Session = Depends(get_db)):
+    user = db.query(Usuario).filter(Usuario.id_usuario == user_id).first()
+    if user is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="El sitio no existe")
+    site = db.query(Perfil).filter(Perfil.id_usuario == user_id).first()
+    adventures = db.query(Aventura).filter(Aventura.id_usuario == user_id).order_by(Aventura.fecha_creacion.desc()).all()
+    media = db.query(Medio).filter(Medio.id_usuario == user_id).order_by(Medio.fecha_publicacion.desc()).all()
+    photos = db.query(Foto).filter(Foto.id_usuario == user_id).order_by(Foto.fecha_subida.desc()).all()
+    return {
+        "nombre_mostrar": (site.nombre_mostrar if site else None) or user.nombre,
+        "descripcion": site.descripcion if site else None,
+        "logo": site.logo if site else None,
+        "fondo_url": site.fondo_url if site else None,
+        "hero_image_url": site.hero_image_url if site else None,
+        "hero_eyebrow": site.hero_eyebrow if site else None,
+        "hero_titulo": site.hero_titulo if site else None,
+        "hero_descripcion": site.hero_descripcion if site else None,
+        "facebook_url": site.facebook_url if site else None,
+        "instagram_url": site.instagram_url if site else None,
+        "tiktok_url": site.tiktok_url if site else None,
+        "youtube_url": site.youtube_url if site else None,
+        "footer_descripcion": site.footer_descripcion if site else None,
+        "copyright_texto": site.copyright_texto if site else None,
+        "aventuras": [
+            {
+                "id_aventura": item.id_aventura,
+                "titulo": item.titulo,
+                "contenido": item.contenido,
+                "ubicacion": item.ubicacion,
+                "imagen_url": item.imagen_url,
+            }
+            for item in adventures
+        ],
+        "media": [
+            {
+                "id_medio": item.id_medio,
+                "titulo": item.titulo,
+                "descripcion": item.descripcion,
+                "tipo": item.tipo,
+                "url": item.url,
+            }
+            for item in media
+        ],
+        "fotos": [
+            {
+                "id_foto": item.id_foto,
+                "nombre_archivo": item.nombre_archivo,
+                "url": item.url,
+            }
+            for item in photos
+        ],
+    }
 
 
 @router.get("/categories")
@@ -88,6 +227,66 @@ def create_adventure(
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="La categoría no pertenece a tu cuenta")
     item = Aventura(**adventure.model_dump(), id_usuario=current_user.id_usuario)
     db.add(item)
+    db.commit()
+    db.refresh(item)
+    return item
+
+
+@router.put("/adventures/{adventure_id}")
+def update_adventure(
+    adventure_id: int,
+    adventure: AdventureUpdate,
+    db: Session = Depends(get_db),
+    current_user: Usuario = Depends(get_current_user),
+):
+    item = db.query(Aventura).filter(
+        Aventura.id_aventura == adventure_id,
+        Aventura.id_usuario == current_user.id_usuario,
+    ).first()
+    if item is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="La aventura no existe")
+    if adventure.id_categoria is not None:
+        category = db.query(Categoria).filter(
+            Categoria.id_categoria == adventure.id_categoria,
+            Categoria.id_usuario == current_user.id_usuario,
+        ).first()
+        if category is None:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="La categoría no pertenece a tu cuenta")
+    for field, value in adventure.model_dump().items():
+        setattr(item, field, value)
+    db.commit()
+    db.refresh(item)
+    return item
+
+
+@router.post("/adventures/{adventure_id}/image", status_code=status.HTTP_201_CREATED)
+def upload_adventure_image(
+    adventure_id: int,
+    file: UploadFile = File(...),
+    db: Session = Depends(get_db),
+    current_user: Usuario = Depends(get_current_user),
+):
+    if file.content_type not in ALLOWED_IMAGE_TYPES:
+        raise HTTPException(status_code=status.HTTP_415_UNSUPPORTED_MEDIA_TYPE, detail="Solo se permiten imágenes JPG, PNG, WEBP o GIF")
+    item = db.query(Aventura).filter(
+        Aventura.id_aventura == adventure_id,
+        Aventura.id_usuario == current_user.id_usuario,
+    ).first()
+    if item is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="La aventura no existe")
+    content = file.file.read()
+    try:
+        image = Image.open(io.BytesIO(content))
+        image.thumbnail((1800, 1800), Image.Resampling.LANCZOS)
+        if image.mode not in ("RGB", "RGBA"):
+            image = image.convert("RGB")
+    except (OSError, ValueError):
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="La imagen no es válida")
+    UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
+    filename = f"{current_user.id_usuario}_{uuid4().hex}.jpg"
+    destination = UPLOAD_DIR / filename
+    image.save(destination, "JPEG", quality=84, optimize=True)
+    item.imagen_url = f"/media/uploads/{filename}"
     db.commit()
     db.refresh(item)
     return item

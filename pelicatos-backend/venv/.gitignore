@@ -1,4 +1,0 @@
-# Created by venv; see https://docs.python.org/3/library/venv.html
-app/venv/
-app/.env
-app/__pycache__/
