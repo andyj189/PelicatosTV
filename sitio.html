@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi sitio | Pelicatos TV</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="cuenta.css">
+</head>
+<body class="public-site-page">
+    <header class="site-header"><nav class="navbar navbar-expand-lg navbar-dark px-4 px-lg-5"><div class="container-fluid"><a class="navbar-brand" href="#inicio"><span class="brand-mark"><img id="public-nav-logo" src="img/logos/logo_titulo.png" alt="Logo"></span><span id="public-brand">Mi sitio</span></a><div class="nav-actions"><a class="nav-link" href="#destinos">Destinos</a><a class="nav-link" href="#experiencias">Experiencias</a><a class="nav-link" href="#galeria">Galería</a><a class="btn btn-light rounded-pill px-4" href="cuenta.html">Editar mi sitio</a></div></div></nav></header>
+    <main id="public-site" hidden>
+        <section class="hero-section public-hero" id="inicio">
+            <div class="container hero-content">
+                <div class="hero-copy">
+                    <img id="public-logo" class="site-logo-preview" src="img/logos/logo_titulo.png" alt="Logo">
+                    <span id="public-eyebrow" class="eyebrow">Mi sitio personal</span>
+                    <h1 id="public-title">Mis aventuras</h1>
+                    <p id="public-description">Historias, fotos y experiencias compartidas.</p>
+                    <a class="btn btn-primary rounded-pill px-4" href="#destinos">Ver mis aventuras</a>
+                </div>
+            </div>
+        </section>
+        <section class="ticker-wrap"><div class="ticker-track"><span>Mis destinos</span><span>Mis experiencias</span><span>Mi galería</span><span>Mi ruta personal</span><span>Mis destinos</span><span>Mis experiencias</span></div></section>
+        <section class="destinations-section container" id="destinos">
+            <div class="section-intro"><span class="eyebrow dark">Destinos</span><h2>Mis aventuras</h2></div>
+            <div class="destination-grid" id="public-adventures"></div>
+        </section>
+        <section class="experiences-section container" id="experiencias">
+            <div class="section-intro"><span class="eyebrow dark">Experiencias</span><h2>Momentos de mi ruta</h2></div>
+            <div class="account-media-grid" id="public-media"></div>
+        </section>
+        <section class="gallery-section container" id="galeria">
+            <div class="section-intro"><span class="eyebrow dark">Galería</span><h2>Mis fotografías</h2></div>
+            <div class="photo-grid account-photo-grid" id="public-photos"></div>
+        </section>
+    </main>
+    <footer class="site-footer" id="redes"><div class="container"><div class="footer-brand"><span class="brand-mark"><img id="public-footer-logo" src="img/logos/logo_titulo.png" alt="Logo"></span><div><strong id="public-footer-brand">Mi sitio</strong><p id="public-footer-description">Viviendo viajes y compartiendo recuerdos.</p></div></div><div class="social-links" id="public-socials"></div><p class="copyright" id="public-copyright">© 2026</p></div></footer>
+    <p class="public-error" id="public-error" hidden>No se pudo cargar este sitio. <a href="cuenta.html">Entrar al panel para crear mi página</a></p>
+    <script src="sitio.js"></script>
+</body>
+</html>
